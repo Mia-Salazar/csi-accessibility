@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- FALLO EXTRA: Deshabilitado el zoom de usuario (WCAG 1.4.4 - Lighthouse alerta) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CSI: Accesibilidad - Expediente #804: El Asesino en Serie de la Banana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;600;700&display=swap">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #06090e;
+      color: #94a3b8;
+    }
+    .font-terminal {
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .font-heading {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* 
+      ==========================================================================
+      [FALLO #2: TECLADO / DEVTOOLS] - ELIMINACIÓN GLOBAL DE FOCO VISUAL
+      ==========================================================================
+    */
+    *:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Efectos CSI Terminal */
+    .scanline {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 240, 255, 0.03) 50%,
+        rgba(0, 240, 255, 0.03)
+      );
+      background-size: 100% 4px;
+    }
+
+    .police-tape {
+      background: repeating-linear-gradient(
+        -45deg,
+        #eab308,
+        #eab308 15px,
+        #090d16 15px,
+        #090d16 30px
+      );
+    }
+
+    /* 
+      ==========================================================================
+      [FALLO #6: CONTRASTE ULTRA BAJO EXTREMO] - Ratios de 1.2:1 a 1.8:1
+      ==========================================================================
+    */
+    .low-contrast-code {
+      color: #1e293b !important; /* Texto casi invisible en fondo oscuro */
+    }
+    .low-contrast-badge {
+      background-color: #0f172a;
+      color: #334155 !important;
+    }
+    .low-contrast-text {
+      color: #334155 !important;
+    }
+
+    /* Estilos para el Modo Pistas del Ponente */
+    .speaker-highlight {
+      position: relative;
+      outline: 3px dashed #f43f5e !important;
+      outline-offset: 4px !important;
+      animation: pulse-border 2s infinite;
+    }
+    .speaker-badge {
+      position: absolute;
+      top: -12px;
+      right: 4px;
+      background: #f43f5e;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      z-index: 60;
+      font-family: 'Share Tech Mono', monospace;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    @keyframes pulse-border {
+      0%, 100% { outline-color: #f43f5e; }
+      50% { outline-color: #fb7185; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col scanline relative">
+
+  <!-- CINTA DE LA ESCENA DEL CRIMEN -->
+  <div class="w-full police-tape py-2 shadow-lg border-b border-yellow-500/30 text-center select-none z-10">
+    <span class="bg-black text-yellow-400 font-bold px-4 py-0.5 tracking-widest text-xs font-terminal uppercase border border-yellow-500/50">
+      <i class="fa-solid fa-biohazard mr-2"></i> POLICE SYSTEM // EVIDENCE ARCHIVE // CASE #804
+    </span>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="max-w-6xl w-full mx-auto p-4 md:p-6 flex-grow flex flex-col gap-6">
+
+    <!-- 
+      ==========================================================================
+      [FALLO #10: JERARQUÍA SEMÁNTICA DESTRUIDA]
+      H5 -> H1 -> H3 -> H2 (DevTools / Lectores marcarán error grave de estructura)
+      ==========================================================================
+    -->
+    <h5 id="speaker-fail-10" class="text-xs font-terminal low-contrast-text uppercase tracking-widest flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-cyan-900"></span> SISTEMA DE INVESTIGACIÓN DE DELITOS
+    </h5>
+
+    <!-- BANNER CABECERA -->
+    <header class="bg-slate-900/90 border border-cyan-900/50 rounded-lg p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden backdrop-blur">
+      <div class="absolute -right-8 -bottom-8 opacity-10 text-cyan-500 pointer-events-none">
+        <i class="fa-solid fa-fingerprint text-9xl"></i>
+      </div>
+
+      <div class="z-10">
+        <h1 class="text-2xl md:text-3xl font-bold font-heading text-slate-100 flex items-center gap-3">
+          <i class="fa-solid fa-folder-open text-cyan-400"></i> CASO #804: "EL ASESINO EN SERIE DE LA BANANA"
+        </h1>
+        
+        <!-- 
+          ==========================================================================
+          [FALLO #9: ENLACES SIN CONTEXTO / SIN ACCESSIBLE NAME]
+          ==========================================================================
+        -->
+        <p class="text-sm text-slate-400 mt-1">
+          Informe confidencial de la escena del crimen. Para descargar la orden judicial 
+          <a href="#orden" id="speaker-fail-9" class="text-cyan-400 underline font-semibold">haz clic aquí</a>.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 z-10">
+        <span class="px-3 py-1 bg-red-950/80 border border-red-600/50 text-red-400 text-xs font-terminal rounded uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-triangle-exclamation"></i> ESTADO: CULPABLE SUELTO
+        </span>
+      </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL (Navegación sin elementos <nav> ni listas <ul>/<li>) -->
+    <div class="bg-slate-950 border border-slate-800 rounded-lg p-2 flex gap-2 text-sm font-terminal">
+      <a href="#sospechosos" class="px-4 py-2 bg-cyan-950/50 text-cyan-300 border border-cyan-800/50 rounded">1. SOSPECHOSOS</a>
+      <a href="#evidencias" class="px-4 py-2 bg-slate-900 text-slate-400 rounded">2. EVIDENCIAS SCENE</a>
+      <a href="#mas-info" class="px-4 py-2 bg-slate-900 text-slate-400 rounded">3. AQUÍ</a>
+    </div>
+
+    <!-- PANEL PRINCIPAL GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- COLUMNA IZQUIERDA: BUSCADOR Y LISTA DE SOSPECHOSOS -->
+      <section class="bg-slate-900/60 border border-slate-800 rounded-lg p-5 flex flex-col gap-5 backdrop-blur">
+        
+        <h3 class="text-lg font-bold font-heading text-slate-200 border-b border-slate-800 pb-2 flex items-center justify-between">
+          <span><i class="fa-solid fa-users text-cyan-400 mr-2"></i> Sospechosos</span>
+          <span class="text-xs font-terminal low-contrast-text">4 REGISTROS</span>
+        </h3>
+
+        <!-- FORMULARIO DE FILTRADO SIN <form> SEMÁNTICO -->
+        <div class="space-y-4">
+          
+          <!-- 
+            ==========================================================================
+            [FALLO #3: INPUTS SIN <label>, SIN id, SIN name]
+            Lighthouse y axe generarán múltiples errores de formularios sin nombre accesible.
+            ==========================================================================
+          -->
+          <div id="speaker-fail-3" class="space-y-1">
+            <span class="text-xs font-terminal low-contrast-text block">Buscar por Alias / ID:</span>
+            <input type="text" 
+                   placeholder="Ej: Hacker_X o #804" 
+                   class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-terminal text-slate-500 placeholder-slate-700">
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [FALLO #8: FALSO ARIA / SWITCH INVENTADO SIN ATRIBUTOS]
+            Usamos role="switch" a propósito PERO omitimos aria-checked y tabindex="0".
+            WAVE y axe marcarán un fallo grave de mal uso de atributos ARIA.
+            ==========================================================================
+          -->
+          <div id="speaker-fail-8" class="flex items-center justify-between bg-slate-950 p-2.5 rounded border border-slate-800">
+            <span class="text-xs font-terminal low-contrast-text">Filtro ADN Positivo:</span>
+            <span id="customDnaSwitch" 
+                  role="switch" 
+                  onclick="toggleDnaFilter()" 
+                  class="w-10 h-5 bg-slate-900 rounded-full p-0.5 cursor-pointer flex items-center transition-colors">
+              <span id="dnaKnob" class="w-4 h-4 bg-slate-700 rounded-full transition-transform"></span>
+            </span>
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [FALLO #4: DIV INTERACTIVO CON FALSO ROLE="BUTTON"]
+            Tiene role="button" pero NO tiene tabindex="0" ni responde a teclas Enter/Espacio.
+            ==========================================================================
+          -->
+          <div id="speaker-fail-4" 
+               role="button"
+               onclick="filterSuspects()" 
+               class="w-full bg-cyan-950 text-cyan-800 font-bold py-2 px-4 rounded text-xs font-terminal text-center cursor-pointer transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-filter"></i> FILTRAR SOSPECHOSOS
+          </div>
+
+        </div>
+
+        <!-- LISTA DE TARJETAS DE SOSPECHOSOS -->
+        <div class="space-y-3 mt-2">
+          
+          <!-- SOSPECHOSO 1 -->
+          <div class="bg-slate-950 border border-red-950/40 p-3 rounded flex items-center gap-3 relative">
+            <div class="w-12 h-12 bg-slate-900 border border-red-900/30 rounded flex items-center justify-center text-red-900 font-bold font-terminal text-lg">
+              #01
+            </div>
+            <div class="flex-grow">
+              <h4 class="text-sm font-bold font-heading text-slate-300">Alex "NullPointer" Vance</h4>
+              <p class="text-xs font-terminal low-contrast-text">Principal Sospechoso</p>
+              
+              <!-- FALLO #6 REPETIDO: Contraste ratio 1.2:1 (Inaudible/Ilegible) -->
+              <span id="speaker-fail-6" class="inline-block text-[10px] font-terminal px-2 py-0.5 rounded mt-1 low-contrast-badge">
+                Huella: 99.4% Match (Código #444)
+              </span>
+            </div>
+          </div>
+
+          <!-- SOSPECHOSO 2 -->
+          <div class="bg-slate-950 border border-slate-900 p-3 rounded flex items-center gap-3">
+            <div class="w-12 h-12 bg-slate-900 border border-slate-800 rounded flex items-center justify-center text-slate-700 font-bold font-terminal text-lg">
+              #02
+            </div>
+            <div>
+              <h4 class="text-sm font-bold font-heading low-contrast-text">Elena "Semicolon" Rostova</h4>
+              <p class="text-xs font-terminal low-contrast-text">Coartada Confirmada</p>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- COLUMNA CENTRAL Y DERECHA: EVIDENCIAS DE LA ESCENA DEL CRIMEN -->
+      <section class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-lg p-5 flex flex-col justify-between backdrop-blur">
+        
+        <div>
+          <h2 class="text-lg font-bold font-heading text-slate-200 border-b border-slate-800 pb-2 mb-4 flex items-center justify-between">
+            <span><i class="fa-solid fa-microscope text-cyan-400 mr-2"></i> Pruebas Recabadas en la Escena</span>
+            <span class="text-xs font-terminal low-contrast-text">EVIDENCIA FORENSE</span>
+          </h2>
+
+          <!-- GRID DE IMÁGENES / PRUEBAS CON FALLOS DE ALT -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            
+            <!-- 
+              ==========================================================================
+              [FALLO #7A: ALT ENGAÑOSO QUE PASA LIGHTHOUSE PERO ES INÚTIL]
+              ==========================================================================
+            -->
+            <div id="speaker-fail-7a" class="bg-slate-950 p-3 rounded border border-slate-800">
+              <img src="https://placehold.co/400x200/0f172a/38bdf8?text=PRUEBA+01:+ARMA+DEL+CRIMEN" 
+                   alt="foto_prueba1_final_v2.png" 
+                   class="w-full h-32 object-cover rounded border border-slate-800 mb-2">
+              <span class="text-xs font-terminal low-contrast-text block">Prueba A: USB Malicioso encontrado</span>
+            </div>
+
+            <!-- 
+              ==========================================================================
+              [FALLO #7B: IMAGEN TOTALMENTE SIN ATRIBUTO ALT]
+              Lighthouse y axe marcarán violación estricta WCAG 1.1.1.
+              ==========================================================================
+            -->
+            <div id="speaker-fail-7b" class="bg-slate-950 p-3 rounded border border-slate-800">
+              <img src="https://placehold.co/400x200/0f172a/ef4444?text=PRUEBA+02:+NOTAS+ASESINO" 
+                   class="w-full h-32 object-cover rounded border border-slate-800 mb-2">
+              <span class="text-xs font-terminal low-contrast-text block">Prueba B: Nota dejada en el teclado</span>
+            </div>
+
+          </div>
+
+          <!-- SECCIÓN DESCRYPTER / TERMINAL CLAVE -->
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
+            <h3 class="text-xs font-terminal low-contrast-text uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-key"></i> Desencriptar Clave de Acceso del Asesino
+            </h3>
+
+            <!-- 
+              ==========================================================================
+              [FALLO #1: LIGHTHOUSE FALSO POSITIVO DE 100%]
+              Atributos de texto basura que hacen la experiencia inusable con lector.
+              ==========================================================================
+            -->
+            <div id="speaker-fail-1" class="space-y-2">
+              <span class="text-xs font-terminal low-contrast-text">Contraseña Encriptada:</span>
+              <div class="flex gap-2">
+                <input type="password" 
+                       value="12345678"
+                       aria-label="qwertyuiopasdfghjkl zxcvbnm 1234567890" 
+                       alt="cadena_de_texto_basura_para_el_lector"
+                       class="bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-xs font-terminal text-slate-600 flex-grow">
+                
+                <!-- Botón sin nombre accesible (solo icono de fontawesome sin aria-label ni texto) -->
+                <button onclick="checkDecryption()" class="px-4 py-1.5 bg-slate-900 text-slate-700 font-terminal text-xs rounded border border-slate-800">
+                  <i class="fa-solid fa-unlock"></i>
+                </button>
+              </div>
+              <p class="text-[11px] font-terminal low-contrast-text">
+                * Nota: Pasa los tests automáticos al 100%, pero destruye la usabilidad del lector de pantalla.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN DE ACCIÓN PARA ABRIR EL EXPEDIENTE CONFIDENCIAL -->
+        <div class="pt-4 border-t border-slate-800 flex justify-between items-center flex-wrap gap-4">
+          <div class="text-xs font-terminal low-contrast-text">
+            AUDITORÍA AUTOMÁTICA: <span class="text-slate-600">INSPECTOR EN VERDE</span>
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [FALLO #5: MODAL INACCESIBLE SIN FOCUS TRAP NI TECLA ESCAPE]
+            ==========================================================================
+          -->
+          <div id="speaker-fail-5" 
+               onclick="openConfidentialModal()"
+               class="px-5 py-2.5 bg-slate-950 text-red-900 font-terminal text-xs rounded border border-red-950 cursor-pointer flex items-center gap-2">
+            <i class="fa-solid fa-lock"></i> ABRIR EXPEDIENTE CONFIDENCIAL (MODAL)
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL EXPEDIENTE CONFIDENCIAL (FALLO #5) -->
+  <div id="confidentialModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 z-50">
+    <div class="bg-slate-950 border border-red-900 rounded-xl p-6 max-w-lg w-full shadow-2xl relative">
+      
+      <div class="flex justify-between items-center mb-4 border-b border-slate-900 pb-3">
+        <h3 class="text-base font-bold font-heading text-red-700 flex items-center gap-2">
+          <i class="fa-solid fa-user-secret"></i> ARCHIVO CLASIFICADO: LA VERDAD DEL CRIMEN
+        </h3>
+        <span onclick="closeConfidentialModal()" class="text-slate-700 hover:text-slate-400 cursor-pointer font-terminal text-sm">
+          [X]
+        </span>
+      </div>
+
+      <p class="text-xs low-contrast-text font-terminal mb-4 leading-relaxed">
+        ¡HAS ENCONTRADO LA PRUEBA REINA! El culpable eliminó todos los indicadores de foco y ocultó los controles detrás de elementos no interactivos.
+      </p>
+
+      <div class="bg-slate-900 p-3 rounded border border-slate-800 text-[11px] font-terminal text-red-900 mb-6 space-y-1">
+        <p><strong>ALERTAS TÉCNICAS EN ESTE MODAL:</strong></p>
+        <p>- El foco no se atrapa en el contenedor (Focus Trap ausente).</p>
+        <p>- Sin soporte para cierre mediante tecla 'Escape'.</p>
+        <p>- Sin semántica ARIA (`role="dialog"` ausente).</p>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="closeConfidentialModal()" class="px-4 py-2 bg-slate-900 text-slate-600 text-xs font-terminal rounded">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICACIÓN TERMINAL -->
+  <div id="terminalToast" class="hidden fixed bottom-16 right-6 bg-slate-950 text-slate-400 border border-slate-800 px-4 py-3 rounded-lg shadow-2xl font-terminal text-xs flex items-center gap-3 z-40">
+    <i class="fa-solid fa-terminal text-cyan-800 text-base"></i>
+    <span id="toastText">Comando procesado.</span>
+  </div>
+
+
+  <!-- ========================================================================== -->
+  <!-- 🕵️ BOTÓN FLOTANTE: MODO PISTAS PARA EL PONENTE                            -->
+  <!-- ========================================================================== -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button onclick="toggleSpeakerMode()" 
+            class="bg-rose-950 hover:bg-rose-900 text-rose-300 font-bold font-terminal text-xs px-4 py-3 rounded-full shadow-2xl border border-rose-800 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
+      <span class="text-base">🕵️</span> 
+      <span id="speakerBtnText">Activar Pistas Ponente</span>
+    </button>
+  </div>
+
+
+  <!-- LÓGICA JAVASCRIPT -->
+  <script>
+    let dnaFilterActive = false;
+    let speakerModeActive = false;
+
+    // Toggle ADN (Fallo #8)
+    function toggleDnaFilter() {
+      dnaFilterActive = !dnaFilterActive;
+      const switchEl = document.getElementById('customDnaSwitch');
+      const knobEl = document.getElementById('dnaKnob');
+
+      if (dnaFilterActive) {
+        switchEl.classList.remove('bg-slate-900');
+        switchEl.classList.add('bg-cyan-950');
+        knobEl.classList.add('translate-x-5', 'bg-cyan-600');
+        knobEl.classList.remove('bg-slate-700');
+        showToast("Filtro ADN activado (Sin estado ARIA)");
+      } else {
+        switchEl.classList.add('bg-slate-900');
+        switchEl.classList.remove('bg-cyan-950');
+        knobEl.classList.remove('translate-x-5', 'bg-cyan-600');
+        knobEl.classList.add('bg-slate-700');
+        showToast("Filtro ADN desactivado");
+      }
+    }
+
+    function filterSuspects() {
+      showToast("Acción ejecutada desde un <div>...");
+    }
+
+    function checkDecryption() {
+      showToast("Verificando clave basura...");
+    }
+
+    function openConfidentialModal() {
+      document.getElementById('confidentialModal').classList.remove('hidden');
+    }
+
+    function closeConfidentialModal() {
+      document.getElementById('confidentialModal').classList.add('hidden');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('terminalToast');
+      document.getElementById('toastText').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    /* MODO PISTAS PARA EL PONENTE */
+    const failuresMap = [
+      { id: 'speaker-fail-1', title: 'Fallo #1: Lighthouse 100% Falso', desc: 'Atributos con texto basura que rompen la lectura.' },
+      { id: 'speaker-fail-3', title: 'Fallo #3: Input sin <label>/id', desc: 'Lighthouse y axe detectan error crítico de formulario.' },
+      { id: 'speaker-fail-4', title: 'Fallo #4: Falso Botón con role="button"', desc: 'Falta tabindex="0" y eventos de teclado.' },
+      { id: 'speaker-fail-5', title: 'Fallo #5: Modal sin Focus Trap', desc: 'El foco queda atrapado en el fondo y ESC no funciona.' },
+      { id: 'speaker-fail-6', title: 'Fallo #6: Contraste Crítico (1.2:1)', desc: 'Violación severa WCAG AA detectada por DevTools.' },
+      { id: 'speaker-fail-7a', title: 'Fallo #7A: alt con nombre de archivo', desc: 'Engaña auditorías automáticas pero no describe la prueba.' },
+      { id: 'speaker-fail-7b', title: 'Fallo #7B: Imagen sin alt', desc: 'Error explícito detectado por Lighthouse.' },
+      { id: 'speaker-fail-8', title: 'Fallo #8: Switch con ARIA incompleto', desc: 'Role switch sin aria-checked provoca fallo en axe.' },
+      { id: 'speaker-fail-9', title: 'Fallo #9: Enlace "Haz clic aquí"', desc: 'Texto ambiguo en el árbol de accesibilidad.' },
+      { id: 'speaker-fail-10', title: 'Fallo #10: Jerarquía H5/H1/H3 Rota', desc: 'Estructura de mapa de documento destruida.' }
+    ];
+
+    function toggleSpeakerMode() {
+      speakerModeActive = !speakerModeActive;
+      const btnText = document.getElementById('speakerBtnText');
+
+      failuresMap.forEach(item => {
+        const el = document.getElementById(item.id);
+        if (!el) return;
+
+        if (speakerModeActive) {
+          el.classList.add('speaker-highlight');
+          if (!el.querySelector('.speaker-badge')) {
+            const badge = document.createElement('div');
+            badge.className = 'speaker-badge';
+            badge.innerText = `${item.title}: ${item.desc}`;
+            el.appendChild(badge);
+          }
+        } else {
+          el.classList.remove('speaker-highlight');
+          const badge = el.querySelector('.speaker-badge');
+          if (badge) badge.remove();
+        }
+      });
+
+      if (speakerModeActive) {
+        btnText.innerText = "Desactivar Pistas Ponente";
+        showToast("🕵️ Modo Pistas Activado.");
+      } else {
+        btnText.innerText = "Activar Pistas Ponente";
+        showToast("Modo Pistas Desactivado.");
+      }
+    }
+  </script>
+
+</body>
+</html>
