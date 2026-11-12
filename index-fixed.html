@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- CORREGIDO: Zoom de usuario habilitado (WCAG 1.4.4) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSI: Accesibilidad - Expediente #804: El Asesino en Serie del Kiwi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;600;700&display=swap">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #06090e;
+      color: #94a3b8;
+    }
+    .font-terminal {
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .font-heading {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* 
+      ==========================================================================
+      [CORREGIDO] - FOCO VISIBLE ACCESIBLE PARA TECLADO
+      ==========================================================================
+    */
+    a:focus-visible, button:focus-visible, input:focus-visible, [role="switch"]:focus-visible {
+      outline: 2px solid #06b6d4 !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.5) !important;
+    }
+
+    /* Efectos CSI Terminal */
+    .scanline {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 240, 255, 0.03) 50%,
+        rgba(0, 240, 255, 0.03)
+      );
+      background-size: 100% 4px;
+    }
+
+    .police-tape {
+      background: repeating-linear-gradient(
+        -45deg,
+        #eab308,
+        #eab308 15px,
+        #090d16 15px,
+        #090d16 30px
+      );
+    }
+
+    /* 
+      ==========================================================================
+      [CORREGIDO] - CONTRASTE ADECUADO (WCAG AA Cumplido)
+      ==========================================================================
+    */
+    .contrast-code {
+      color: #cbd5e1 !important; /* Texto claro sobre fondo oscuro */
+    }
+    .contrast-badge {
+      background-color: #0f172a;
+      color: #38bdf8 !important;
+      border: 1px solid #0369a1;
+    }
+    .contrast-text {
+      color: #cbd5e1 !important;
+    }
+
+    /* Estilos para el Modo Pistas del Ponente */
+    .speaker-highlight {
+      position: relative;
+      outline: 3px dashed #f43f5e !important;
+      outline-offset: 4px !important;
+      animation: pulse-border 2s infinite;
+    }
+    .speaker-badge {
+      position: absolute;
+      top: -12px;
+      right: 4px;
+      background: #f43f5e;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      z-index: 60;
+      font-family: 'Share Tech Mono', monospace;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    @keyframes pulse-border {
+      0%, 100% { outline-color: #f43f5e; }
+      50% { outline-color: #fb7185; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col scanline relative">
+
+  <!-- CINTA DE LA ESCENA DEL CRIMEN -->
+  <div class="w-full police-tape py-6 shadow-lg border-b border-yellow-500/30 text-center select-none z-10" role="region" aria-label="Aviso de zona restringida">
+    <span class="bg-black text-yellow-400 font-bold px-4 py-0.5 tracking-widest text-xs font-terminal uppercase border border-yellow-500/50">
+      <i class="fa-solid fa-biohazard mr-2" aria-hidden="true"></i> POLICE SYSTEM // EVIDENCE ARCHIVE // CASE #804
+    </span>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-6 flex-grow flex flex-col gap-6">
+
+    <!-- 
+      ==========================================================================
+      [CORREGIDO] - JERARQUÍA SEMÁNTICA CORRECTA (H1 como título principal)
+      ==========================================================================
+    -->
+    <p id="speaker-fail-10" class="text-xs font-terminal contrast-text uppercase tracking-widest flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-cyan-400" aria-hidden="true"></span> SISTEMA DE INVESTIGACIÓN DE DELITOS
+    </p>
+
+    <!-- BANNER CABECERA -->
+    <header class="bg-slate-900/90 border border-cyan-900/50 rounded-lg p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden backdrop-blur">
+      <div class="absolute -right-8 -bottom-8 opacity-10 text-cyan-500 pointer-events-none" aria-hidden="true">
+        <i class="fa-solid fa-fingerprint text-9xl"></i>
+      </div>
+
+      <div class="z-10">
+        <h1 class="text-2xl md:text-3xl font-bold font-heading text-slate-100 flex items-center gap-3">
+          <i class="fa-solid fa-folder-open text-cyan-400" aria-hidden="true"></i> CASO #804: "EL ASESINO EN SERIE DEL KIWI"
+        </h1>
+        
+        <!-- 
+          ==========================================================================
+          [CORREGIDO] - ENLACES CON CONTEXTO Y ACCESSIBLE NAME CLARO
+          ==========================================================================
+        -->
+        <p class="text-sm text-slate-300 mt-1">
+          Informe confidencial de la escena del crimen. 
+          <a href="#orden" id="speaker-fail-9" class="text-cyan-400 underline font-semibold focus:outline-none">Descargar la orden judicial del caso #804</a>.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 z-10">
+        <span class="px-3 py-1 bg-red-950/80 border border-red-600/50 text-red-400 text-xs font-terminal rounded uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ESTADO: CULPABLE SUELTO
+        </span>
+      </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL (Estructurada con <nav> y lista semántica <ul>) -->
+    <nav class="bg-slate-950 border border-slate-800 rounded-lg p-2 font-terminal" aria-label="Menú principal del expediente">
+      <ul class="flex gap-2 text-sm">
+        <li><a href="#sospechosos" class="px-4 py-2 bg-cyan-950/50 text-cyan-300 border border-cyan-800/50 rounded block focus:outline-none">1. SOSPECHOSOS</a></li>
+        <li><a href="#evidencias" class="px-4 py-2 bg-slate-900 text-slate-300 rounded block focus:outline-none">2. EVIDENCIAS SCENE</a></li>
+        <li><a href="#mas-info" class="px-4 py-2 bg-slate-900 text-slate-300 rounded block focus:outline-none">3. ARCHIVO ADJUNTO</a></li>
+      </ul>
+    </nav>
+
+    <!-- PANEL PRINCIPAL GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- COLUMNA IZQUIERDA: BUSCADOR Y LISTA DE SOSPECHOSOS -->
+      <section class="bg-slate-900/60 border border-slate-800 rounded-lg p-5 flex flex-col gap-5 backdrop-blur">
+        
+        <h2 class="text-lg font-bold font-heading text-slate-200 border-b border-slate-800 pb-2 flex items-center justify-between">
+          <span><i class="fa-solid fa-users text-cyan-400 mr-2" aria-hidden="true"></i> Sospechosos</span>
+          <span class="text-xs font-terminal contrast-text">4 REGISTROS</span>
+        </h2>
+
+        <!-- FORMULARIO DE FILTRADO CON <form> SEMÁNTICO -->
+        <form class="space-y-4" onsubmit="event.preventDefault();">
+          
+          <!-- 
+            ==========================================================================
+            [CORREGIDO] - INPUTS CON <label> ASOCIADO MEDIANTE id Y for
+            ==========================================================================
+          -->
+          <div id="speaker-fail-3" class="space-y-1">
+            <label for="searchAlias" class="text-xs font-terminal contrast-text block">Buscar por Alias / ID:</label>
+            <input type="text" 
+                   id="searchAlias"
+                   name="searchAlias"
+                   placeholder="Ej: Hacker_X o #804" 
+                   class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-terminal text-slate-200 placeholder-slate-500 focus:outline-none">
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [CORREGIDO] - SWITCH ACCESIBLE CON role="switch", aria-checked y tabindex
+            ==========================================================================
+          -->
+          <div id="speaker-fail-8" class="flex items-center justify-between bg-slate-950 p-2.5 rounded border border-slate-800">
+            <label id="dnaSwitchLabel" class="text-xs font-terminal contrast-text cursor-pointer">Filtro ADN Positivo:</label>
+            <button type="button"
+                    id="customDnaSwitch" 
+                    role="switch" 
+                    aria-checked="false"
+                    aria-labelledby="dnaSwitchLabel"
+                    onclick="toggleDnaFilter()" 
+                    class="w-10 h-5 bg-slate-900 rounded-full p-0.5 cursor-pointer flex items-center transition-colors focus:outline-none">
+              <span id="dnaKnob" class="w-4 h-4 bg-slate-700 rounded-full transition-transform" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [CORREGIDO] - BOTÓN NATIVO EN LUGAR DE DIV INTERACTIVO
+            ==========================================================================
+          -->
+          <div id="speaker-fail-4">
+            <button type="button"
+                    onclick="filterSuspects()" 
+                    class="w-full bg-cyan-950 hover:bg-cyan-900 text-cyan-200 font-bold py-2 px-4 rounded text-xs font-terminal text-center cursor-pointer transition-all flex items-center justify-center gap-2 focus:outline-none border border-cyan-800">
+              <i class="fa-solid fa-filter" aria-hidden="true"></i> FILTRAR SOSPECHOSOS
+            </button>
+          </div>
+
+        </form>
+
+        <!-- LISTA DE TARJETAS DE SOSPECHOSOS -->
+        <div class="space-y-3 mt-2">
+          
+          <!-- SOSPECHOSO 1 -->
+          <article class="bg-slate-950 border border-red-950/40 p-3 rounded flex items-center gap-3 relative">
+            <div class="w-12 h-12 bg-slate-900 border border-red-900/30 rounded flex items-center justify-center text-red-400 font-bold font-terminal text-lg" aria-hidden="true">
+              #01
+            </div>
+            <div class="flex-grow">
+              <h3 class="text-sm font-bold font-heading text-slate-200">Alex "NullPointer" Vance</h3>
+              <p class="text-xs font-terminal contrast-text">Principal Sospechoso</p>
+              
+              <!-- CORREGIDO: Contraste adecuado -->
+              <span id="speaker-fail-6" class="inline-block text-[10px] font-terminal px-2 py-0.5 rounded mt-1 contrast-badge">
+                Huella: 99.4% Match (Código #444)
+              </span>
+            </div>
+          </article>
+
+          <!-- SOSPECHOSO 2 -->
+          <article class="bg-slate-950 border border-slate-900 p-3 rounded flex items-center gap-3">
+            <div class="w-12 h-12 bg-slate-900 border border-slate-800 rounded flex items-center justify-center text-slate-400 font-bold font-terminal text-lg" aria-hidden="true">
+              #02
+            </div>
+            <div>
+              <h3 class="text-sm font-bold font-heading contrast-text">Elena "Semicolon" Rostova</h3>
+              <p class="text-xs font-terminal contrast-text">Coartada Confirmada</p>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+
+      <!-- COLUMNA CENTRAL Y DERECHA: EVIDENCIAS DE LA ESCENA DEL CRIMEN -->
+      <section id="evidencias" class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-lg p-5 flex flex-col justify-between backdrop-blur">
+        
+        <div>
+          <h2 class="text-lg font-bold font-heading text-slate-200 border-b border-slate-800 pb-2 mb-4 flex items-center justify-between">
+            <span><i class="fa-solid fa-microscope text-cyan-400 mr-2" aria-hidden="true"></i> Pruebas Recabadas en la Escena</span>
+            <span class="text-xs font-terminal contrast-text">EVIDENCIA FORENSE</span>
+          </h2>
+
+          <!-- GRID DE IMÁGENES / PRUEBAS CON ALT CORREGIDO -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            
+            <!-- 
+              ==========================================================================
+              [CORREGIDO] - ALT DESCRIPTIVO Y ÚTIL (WCAG 1.1.1)
+              ==========================================================================
+            -->
+            <div id="speaker-fail-7a" class="bg-slate-950 p-3 rounded border border-slate-800">
+              <img src="https://placehold.co/400x200/0f172a/38bdf8?text=PRUEBA+01:+ARMA+DEL+CRIMEN" 
+                   alt="Captura de memoria USB en miniatura encontrada junto al ordenador de la víctima." 
+                   class="w-full h-32 object-cover rounded border border-slate-800 mb-2">
+              <p class="text-xs font-terminal contrast-text">Prueba A: USB Malicioso encontrado</p>
+            </div>
+
+            <!-- 
+              ==========================================================================
+              [CORREGIDO] - IMAGEN CON ALT DESCRIPTIVO ADECUADO
+              ==========================================================================
+            -->
+            <div id="speaker-fail-7b" class="bg-slate-950 p-3 rounded border border-slate-800">
+              <img src="https://placehold.co/400x200/0f172a/ef4444?text=PRUEBA+02:+NOTAS+ASESINO" 
+                   alt="Bloc de notas manuscrito sobre un teclado con instrucciones cifradas." 
+                   class="w-full h-32 object-cover rounded border border-slate-800 mb-2">
+              <p class="text-xs font-terminal contrast-text">Prueba B: Nota dejada en el teclado</p>
+            </div>
+
+          </div>
+
+          <!-- SECCIÓN DESCRYPTER / TERMINAL CLAVE -->
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
+            <h3 class="text-xs font-terminal contrast-text uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-key" aria-hidden="true"></i> Desencriptar Clave de Acceso del Asesino
+            </h3>
+
+            <!-- 
+              ==========================================================================
+              [CORREGIDO] - INPUT CON ETIQUETA REAL Y ACCESSIBLE NAME LIMPIO
+              ==========================================================================
+            -->
+            <div id="speaker-fail-1" class="space-y-2">
+              <label for="decryptInput" class="text-xs font-terminal contrast-text block">Contraseña Encriptada:</label>
+              <div class="flex gap-2">
+                <input type="password" 
+                       id="decryptInput"
+                       name="decryptInput"
+                       value="12345678"
+                       class="bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-xs font-terminal text-slate-200 flex-grow focus:outline-none">
+                
+                <!-- Botón con texto descriptivo o aria-label para lectores de pantalla -->
+                <button type="button" onclick="checkDecryption()" aria-label="Desbloquear contraseña" class="px-4 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 font-terminal text-xs rounded border border-slate-800 focus:outline-none flex items-center justify-center">
+                  <i class="fa-solid fa-unlock" aria-hidden="true"></i>
+                </button>
+              </div>
+              <p class="text-[11px] font-terminal contrast-text">
+                * Nota: Entradas y formularios correctamente etiquetados para lectores de pantalla.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN DE ACCIÓN PARA ABRIR EL EXPEDIENTE CONFIDENCIAL -->
+        <div class="pt-4 border-t border-slate-800 flex justify-between items-center flex-wrap gap-4">
+          <div class="text-xs font-terminal contrast-text">
+            AUDITORÍA AUTOMÁTICA: <span class="text-cyan-400 font-semibold">CUMPLIMIENTO ACCESIBLE VERIFICADO</span>
+          </div>
+
+          <!-- 
+            ==========================================================================
+            [CORREGIDO] - BOTÓN NATIVO PARA ABRIR MODAL
+            ==========================================================================
+          -->
+          <div id="speaker-fail-5">
+            <button type="button"
+                    onclick="openConfidentialModal()"
+                    class="px-5 py-2.5 bg-slate-950 hover:bg-slate-900 text-red-300 font-terminal text-xs rounded border border-red-800 cursor-pointer flex items-center gap-2 focus:outline-none">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> ABRIR EXPEDIENTE CONFIDENCIAL (MODAL)
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL EXPEDIENTE CONFIDENCIAL (CORREGIDO CON FOCUS TRAP, ARIA-MODAL Y ESCAPE) -->
+  <div id="confidentialModal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div id="modalContent" class="bg-slate-950 border border-red-700 rounded-xl p-6 max-w-lg w-full shadow-2xl relative">
+      
+      <div class="flex justify-between items-center mb-4 border-b border-slate-900 pb-3">
+        <h2 id="modalTitle" class="text-base font-bold font-heading text-red-400 flex items-center gap-2">
+          <i class="fa-solid fa-user-secret" aria-hidden="true"></i> ARCHIVO CLASIFICADO: LA VERDAD DEL CRIMEN
+        </h2>
+        <button type="button" onclick="closeConfidentialModal()" aria-label="Cerrar modal" class="text-slate-400 hover:text-slate-200 cursor-pointer font-terminal text-sm focus:outline-none p-1">
+          [X]
+        </button>
+      </div>
+
+      <p class="text-xs contrast-text font-terminal mb-4 leading-relaxed">
+        ¡HAS ACCEDIDO AL EXPEDIENTE SEGURO! Este modal cuenta con estructura semántica, atributo <code class="text-cyan-400">aria-modal="true"</code>, bloqueo de foco integrado (Focus Trap) y soporte completo para la tecla Escape.
+      </p>
+
+      <div class="bg-slate-900 p-3 rounded border border-slate-800 text-[11px] font-terminal text-green-400 mb-6 space-y-1">
+        <p><strong>BUENAS PRÁCTICAS APLICADAS EN ESTE MODAL:</strong></p>
+        <p>- El foco está confinado en el interior del diálogo (Focus Trap activo).</p>
+        <p>- Cierre inmediato soportado mediante la tecla 'Escape'.</p>
+        <p>- Semántica ARIA correcta (`role="dialog"` y `aria-modal="true"`).</p>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="button" id="closeModalBtn" onclick="closeConfidentialModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-terminal rounded focus:outline-none border border-slate-700">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICACIÓN TERMINAL -->
+  <div id="terminalToast" class="hidden fixed bottom-16 right-6 bg-slate-950 text-slate-200 border border-slate-800 px-4 py-3 rounded-lg shadow-2xl font-terminal text-xs flex items-center gap-3 z-40" role="status" aria-live="polite">
+    <i class="fa-solid fa-terminal text-cyan-400 text-base" aria-hidden="true"></i>
+    <span id="toastText">Comando procesado.</span>
+  </div>
+
+
+  <!-- LÓGICA JAVASCRIPT -->
+  <script>
+    let dnaFilterActive = false;
